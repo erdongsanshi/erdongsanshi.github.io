@@ -168,13 +168,24 @@ details summary {
     line-height: 1.65;
 }
 
+.name-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.35em;
+}
+
+.name-divider {
+    font-weight: 300;
+    color: #cbd5e1;
+}
+
 .chinese-name {
     font-family: 'Zhi Mang Xing', 'Crimson Text', serif;
     font-weight: 400;
     font-size: 1.7em;
     line-height: 1;
-    margin-left: 0.2em;
-    vertical-align: 0.14em;
 }
 
 .link-highlight {
