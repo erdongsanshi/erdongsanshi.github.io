@@ -258,89 +258,26 @@ function createPublicationItem(pub) {
     const content = document.createElement('div');
     content.className = 'pub-content-wrapper';
 
+    // Line 1: [abbreviation] Title  PDF  Code  Image
     const line1 = document.createElement('div');
     line1.className = 'pub-line-1';
 
-    if (pub.thumbnail) {
-        const toggleBtn = document.createElement('button');
-        toggleBtn.type = 'button';
-        toggleBtn.className = 'pub-toggle-btn';
-        toggleBtn.setAttribute('aria-label', 'Toggle preview image');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        toggleBtn.addEventListener('click', () => {
-            const expanded = item.classList.toggle('pub-expanded');
-            item.classList.toggle('with-thumbnail-expanded', expanded);
-            toggleBtn.setAttribute('aria-expanded', String(expanded));
-        });
-        line1.appendChild(toggleBtn);
+    const venueFullName = getVenueFullName(pub.venue, pub.year);
+    const venueShortName = getVenueShortName(pub.venue, pub.year);
+
+    if (shouldShowVenueTag(pub.venue, venueFullName, venueShortName)) {
+        const abbr = document.createElement('span');
+        abbr.className = 'pub-abbr-prefix';
+        abbr.textContent = `[${venueShortName}]`;
+        line1.appendChild(abbr);
     }
 
     const title = document.createElement('span');
     title.className = 'pub-title-text';
     title.textContent = pub.displayTitle || pub.title || 'Untitled Publication';
     line1.appendChild(title);
-    content.appendChild(line1);
-
-    const line2 = document.createElement('div');
-    line2.className = 'pub-line-2';
-    line2.innerHTML = pub.authors || '';
-    content.appendChild(line2);
-
-    const line3 = document.createElement('div');
-    line3.className = 'pub-line-3';
-
-    const venueFullName = getVenueFullName(pub.venue, pub.year);
-    const venueShortName = getVenueShortName(pub.venue, pub.year);
-    const venueText = venueFullName || pub.venue || 'Preprint';
-
-    const venueNameSpan = document.createElement('span');
-    venueNameSpan.textContent = venueText;
-    line3.appendChild(venueNameSpan);
-
-    if (shouldShowVenueTag(pub.venue, venueFullName, venueShortName)) {
-        const venueTag = document.createElement('span');
-        venueTag.className = 'pub-venue-tag pub-venue-inline-tag';
-        venueTag.textContent = venueShortName;
-
-        const lowerVenue = venueShortName.toLowerCase();
-        if (lowerVenue.includes('under review') || lowerVenue.includes('preprint') || lowerVenue.includes('arxiv')) {
-            venueTag.classList.add('tag-under-review');
-        } else {
-            venueTag.classList.add('tag-conference');
-        }
-
-        line3.appendChild(venueTag);
-    }
-
-    const badgeText = getHighlightBadge(pub.highlight);
-    if (badgeText) {
-        const badge = document.createElement('span');
-        badge.className = 'pub-badge-highlight';
-        badge.textContent = badgeText;
-        line3.appendChild(badge);
-    }
-
-    if (pub.jcr) {
-        const jcrTag = document.createElement('span');
-        jcrTag.className = 'pub-jcr-tag';
-        jcrTag.textContent = 'JCR ' + pub.jcr;
-        line3.appendChild(jcrTag);
-    }
-
-    if (pub.ccf) {
-        const ccfTag = document.createElement('span');
-        ccfTag.className = 'pub-ccf-tag';
-        ccfTag.textContent = '(CCF-' + pub.ccf + ')';
-        line3.appendChild(ccfTag);
-    }
-
-    content.appendChild(line3);
 
     if (pub.tags && Array.isArray(pub.tags)) {
-        const line4 = document.createElement('div');
-        line4.className = 'pub-line-4';
-
         pub.tags.forEach(tag => {
             const label = tag.text === 'Paper' ? 'PDF' : (tag.text || 'Link');
             const usableLink = hasUsableLink(tag.link);
@@ -358,14 +295,62 @@ function createPublicationItem(pub) {
                 button.title = 'Replace "#" with a real link in data/publications.json';
             }
 
-            line4.appendChild(button);
+            line1.appendChild(button);
         });
-
-        if (line4.children.length > 0) {
-            content.appendChild(line4);
-        }
     }
 
+    let toggleBtn = null;
+    if (pub.thumbnail) {
+        toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'pub-link-btn pub-btn-preview';
+        toggleBtn.textContent = 'Image';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.addEventListener('click', () => {
+            const expanded = item.classList.toggle('with-thumbnail-expanded');
+            toggleBtn.setAttribute('aria-expanded', String(expanded));
+        });
+        line1.appendChild(toggleBtn);
+    }
+
+    content.appendChild(line1);
+
+    const line2 = document.createElement('div');
+    line2.className = 'pub-line-2';
+    line2.innerHTML = pub.authors || '';
+    content.appendChild(line2);
+
+    // Line 3: JCR badge, full venue name (italic), CCF rank
+    const line3 = document.createElement('div');
+    line3.className = 'pub-line-3';
+
+    if (pub.jcr) {
+        const jcrTag = document.createElement('span');
+        jcrTag.className = 'pub-jcr-tag';
+        jcrTag.textContent = 'JCR ' + pub.jcr;
+        line3.appendChild(jcrTag);
+    }
+
+    const venueNameSpan = document.createElement('span');
+    venueNameSpan.textContent = venueFullName || pub.venue || 'Preprint';
+    line3.appendChild(venueNameSpan);
+
+    if (pub.ccf) {
+        const ccfTag = document.createElement('span');
+        ccfTag.className = 'pub-ccf-tag';
+        ccfTag.textContent = '(CCF-' + pub.ccf + ')';
+        line3.appendChild(ccfTag);
+    }
+
+    const badgeText = getHighlightBadge(pub.highlight);
+    if (badgeText) {
+        const badge = document.createElement('span');
+        badge.className = 'pub-badge-highlight';
+        badge.textContent = badgeText;
+        line3.appendChild(badge);
+    }
+
+    content.appendChild(line3);
     item.appendChild(content);
 
     if (pub.thumbnail) {
