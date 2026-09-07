@@ -4,52 +4,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500;1,8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f5f4ef;
+    --paper:#eff1ea;
     --paper-raised:#ffffff;
     --ink:#1c1f1b;
     --ink-muted:#5b5f53;
     --ink-faint:#8d8f80;
-    --line:#e0dccf;
-    --line-strong:#cbc6b5;
+    --line:#d7d8cb;
+    --line-strong:#c1c2b1;
     --accent:#2f5d4e;
     --accent-strong:#204237;
     --accent-soft:#e3e9df;
-    --accent-ink:#f5f4ef;
-    --gold:#96762f;
+    --accent-ink:#eff1ea;
     --shadow:rgba(28,31,27,0.10);
     --focus:#2f5d4e;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#15170f;
-      --paper-raised:#1c1e17;
+      --paper:#14160f;
+      --paper-raised:#1b1d17;
       --ink:#ece9dd;
       --ink-muted:#a9ac9b;
       --ink-faint:#787a6b;
-      --line:#2b2d23;
-      --line-strong:#3a3c2f;
+      --line:#2a2c22;
+      --line-strong:#393b2e;
       --accent:#83c3a5;
       --accent-strong:#a3d8bc;
       --accent-soft:#1f2b21;
       --accent-ink:#0e1310;
-      --gold:#cdac6b;
       --shadow:rgba(0,0,0,0.45);
       --focus:#83c3a5;
     }
   }
   :root[data-theme="dark"]{
-    --paper:#15170f;
-    --paper-raised:#1c1e17;
+    --paper:#14160f;
+    --paper-raised:#1b1d17;
     --ink:#ece9dd;
     --ink-muted:#a9ac9b;
     --ink-faint:#787a6b;
-    --line:#2b2d23;
-    --line-strong:#3a3c2f;
+    --line:#2a2c22;
+    --line-strong:#393b2e;
     --accent:#83c3a5;
     --accent-strong:#a3d8bc;
     --accent-soft:#1f2b21;
     --accent-ink:#0e1310;
-    --gold:#cdac6b;
     --shadow:rgba(0,0,0,0.45);
     --focus:#83c3a5;
   }
@@ -160,33 +157,22 @@
   @media (max-width:880px){
     aside.rail{ position:static; }
   }
-  .medallion{
-    width:104px; height:104px;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
-      var(--paper-raised);
-    border:1px solid var(--line-strong);
-    box-shadow:0 1px 2px var(--shadow), inset 0 0 0 5px var(--paper);
-    outline:1px solid var(--line);
-    outline-offset:4px;
-    display:flex; align-items:center; justify-content:center;
-    font-family:"Source Serif 4", serif;
-    font-weight:600;
-    font-size:2rem;
-    color:var(--accent-strong);
-  }
-  .identity h1{ font-size:clamp(1.5rem,2.4vw,1.8rem); margin-bottom:6px; }
+  .identity h1{ font-size:clamp(1.5rem,2.4vw,1.8rem); margin-bottom:8px; }
   .identity .role{
-    color:var(--gold);
-    font-weight:600;
-    font-size:0.95rem;
-    margin-bottom:2px;
+    font-family:"IBM Plex Mono", monospace;
+    color:var(--ink-muted);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-weight:500;
+    font-size:0.76rem;
+    margin-bottom:8px;
   }
   .identity .affil{
     color:var(--ink-muted);
     font-size:0.88rem;
     line-height:1.5;
+    padding-top:10px;
+    border-top:1px solid var(--line);
   }
   .rail-block{ border-top:1px solid var(--line); padding-top:18px; }
   .rail-block h3{
@@ -213,18 +199,17 @@
     border-radius:1px;
     transform:rotate(45deg);
   }
-  .contact-row{ display:flex; gap:10px; }
+  .contact-row{ display:flex; gap:8px; }
   .icon-btn{
-    width:34px; height:34px;
+    width:32px; height:32px;
     border:1px solid var(--line-strong);
-    border-radius:8px;
+    border-radius:2px;
     display:flex; align-items:center; justify-content:center;
     color:var(--ink-muted);
     text-decoration:none;
-    transition:border-color .15s ease, color .15s ease, background .15s ease;
-    background:var(--paper-raised);
+    transition:border-color .15s ease, color .15s ease;
   }
-  .icon-btn:hover{ color:var(--accent-strong); border-color:var(--accent); background:var(--accent-soft); }
+  .icon-btn:hover{ color:var(--accent-strong); border-color:var(--accent); }
   .icon-btn svg{ width:16px; height:16px; }
 
   /* ---------- content sections ---------- */
@@ -235,18 +220,21 @@
   .prose p:last-child{ margin-bottom:0; }
   .prose strong{ color:var(--ink); font-weight:600; }
 
-  .callout{
+  .note{
     margin-top:20px;
-    border:1px solid var(--line-strong);
-    border-left:3px solid var(--accent);
-    background:var(--accent-soft);
-    border-radius:4px;
-    padding:14px 18px;
     font-size:0.93rem;
-    color:var(--ink);
+    color:var(--ink-muted);
     max-width:62ch;
   }
-  .callout strong{ color:var(--accent-strong); }
+  .note-label{
+    font-family:"IBM Plex Mono", monospace;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.72rem;
+    color:var(--ink-faint);
+    margin-right:0.6em;
+  }
+  .note strong{ color:var(--ink); font-weight:600; }
 
   blockquote.thesis{
     margin:0 0 28px;
@@ -263,28 +251,30 @@
     margin:0;
   }
 
-  .thrust-grid{
+  .thrust-flow{ margin-top:8px; }
+  .thrust-step{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
-    margin-top:24px;
+    grid-template-columns:2.2em 1fr;
+    gap:14px;
+    padding:18px 0;
+    border-top:1px solid var(--line);
   }
-  @media (max-width:640px){ .thrust-grid{ grid-template-columns:1fr; } }
-  .thrust-card{
-    border:1px solid var(--line);
-    background:var(--paper-raised);
-    border-radius:6px;
-    padding:20px 22px;
+  .thrust-num{
+    font-family:"IBM Plex Mono", monospace;
+    color:var(--ink-faint);
+    font-size:0.9rem;
+    padding-top:0.2em;
   }
-  .thrust-card h3{
+  .thrust-step h3{
     font-size:1.02rem;
-    margin-bottom:8px;
+    margin-bottom:6px;
   }
-  .thrust-card p{
+  .thrust-step p{
     font-size:0.9rem;
     color:var(--ink-muted);
     margin:0;
     line-height:1.6;
+    max-width:56ch;
   }
 
   /* publications */
@@ -330,7 +320,7 @@
     font-size:0.68rem;
     letter-spacing:0.03em;
     padding:2px 7px;
-    border-radius:3px;
+    border-radius:2px;
     border:1px solid var(--line-strong);
     color:var(--ink-muted);
   }
@@ -387,10 +377,6 @@
     color:var(--ink-faint);
   }
 
-  .fade-in{ animation:fadeIn .6s ease both; }
-  .fade-in.d1{ animation-delay:.08s; }
-  .fade-in.d2{ animation-delay:.16s; }
-  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
 </style>
 
 <header class="site">
@@ -408,8 +394,7 @@
 </header>
 
 <main id="top">
-  <aside class="rail fade-in">
-    <div class="medallion" aria-hidden="true">YN</div>
+  <aside class="rail">
     <div class="identity">
       <h1>Your Name</h1>
       <div class="role">Doctoral Candidate</div>
@@ -452,7 +437,7 @@
         <p>I am a doctoral candidate in the Department of Materials Science &amp; Textile Engineering at Your University, working on the physically based simulation of fiber-scale yarn structure &mdash; from ply geometry, twist, and crimp to the appearance models used in cloth rendering.</p>
         <p>My work sits at the boundary of computational textile modeling and computer graphics: turning production specifications &mdash; denier, filament count, twist per metre &mdash; into geometry a renderer, and eventually a simulator, can trust. Prior to my doctoral studies, I completed an M.S. at Another University, advised by <strong>Prof. Advisor Name</strong>.</p>
       </div>
-      <div class="callout"><strong>Open to collaboration.</strong> If you work on procedural material capture, cloth simulation, or garment digitization, I would like to hear from you &mdash; reach me at the address below.</div>
+      <p class="note"><span class="note-label">Note</span><strong>Open to collaboration.</strong> If you work on procedural material capture, cloth simulation, or garment digitization, I would like to hear from you &mdash; reach me at the address below.</p>
     </section>
 
     <section id="research">
@@ -462,14 +447,20 @@
       <div class="prose">
         <p>The work progresses from explicit fiber-level geometry, through learned Gaussian yarn assets, to fabrics assembled from that asset library &mdash; each stage keeping process parameters traceable back to their physical source.</p>
       </div>
-      <div class="thrust-grid">
-        <div class="thrust-card">
-          <h3>Fiber-Scale Geometry Synthesis</h3>
-          <p>Generating monofilament, plied, and core-spun yarn geometry directly from process presets &mdash; twist, migration, crimp, and interlacing &mdash; with provenance kept separate from synthetic priors.</p>
+      <div class="thrust-flow">
+        <div class="thrust-step">
+          <span class="thrust-num">I</span>
+          <div>
+            <h3>Fiber-Scale Geometry Synthesis</h3>
+            <p>Generating monofilament, plied, and core-spun yarn geometry directly from process presets &mdash; twist, migration, crimp, and interlacing &mdash; with provenance kept separate from synthetic priors.</p>
+          </div>
         </div>
-        <div class="thrust-card">
-          <h3>Yarn-to-Fabric Asset Learning</h3>
-          <p>Compressing multi-view captures of canonical yarn bodies into reusable, editable Gaussian assets that downstream fabric assembly can relax, collide, and render at scale.</p>
+        <div class="thrust-step">
+          <span class="thrust-num">II</span>
+          <div>
+            <h3>Yarn-to-Fabric Asset Learning</h3>
+            <p>Compressing multi-view captures of canonical yarn bodies into reusable, editable Gaussian assets that downstream fabric assembly can relax, collide, and render at scale.</p>
+          </div>
         </div>
       </div>
     </section>
