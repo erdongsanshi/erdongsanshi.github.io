@@ -332,7 +332,8 @@ function createPublicationItem(pub) {
     }
 
     const venueNameSpan = document.createElement('span');
-    venueNameSpan.textContent = venueFullName || pub.venue || 'Preprint';
+    const venueBaseName = venueFullName || pub.venue || 'Preprint';
+    venueNameSpan.textContent = pub.year ? `${venueBaseName}, ${pub.year}` : venueBaseName;
     line3.appendChild(venueNameSpan);
 
     if (pub.ccf) {
