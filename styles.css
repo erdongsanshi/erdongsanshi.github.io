@@ -176,6 +176,10 @@ details summary {
     gap: 0.35em;
 }
 
+.name-line .latin-name {
+    font-size: 1.15em;
+}
+
 .name-divider {
     font-weight: 300;
     color: #cbd5e1;
