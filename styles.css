@@ -164,8 +164,15 @@ details summary {
 
 .formal-font {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 1.18rem;
+    line-height: 1.65;
+}
+
+.chinese-name {
+    font-family: 'Zhi Mang Xing', 'Crimson Text', serif;
+    font-weight: 400;
+    font-size: 1.15em;
+    margin-left: 0.15em;
 }
 
 .link-highlight {

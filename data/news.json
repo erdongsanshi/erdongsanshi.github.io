@@ -1,14 +1,10 @@
 [
   {
-    "date": "2025-01-01",
-    "content": "Welcome to my new academic homepage! This template is available on GitHub.",
+    "date": "2025-03-26",
+    "content": "Our paper <em>\"The Effectiveness of a Simplified Model Structure for Crowd Counting\"</em> was published in <strong>IEEE Transactions on Instrumentation and Measurement</strong> (Vol. 74).",
     "links": [
-        { "text": "GitHub", "url": "https://github.com/yihangtao/AcaNova-X" }
+      { "text": "Paper", "url": "https://ieeexplore.ieee.org/document/10938701" },
+      { "text": "Code", "url": "https://github.com/erdongsanshi/Fuss-Free-structure" }
     ]
-  },
-  {
-     "date": "2024-12-15",
-     "content": "One paper titled 'A Novel Approach to AI' was accepted to CVPR 2025!",
-     "links": []
   }
 ]
