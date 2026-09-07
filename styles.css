@@ -476,6 +476,7 @@ details summary {
 }
 
 .pub-thumbnail-box {
+    display: none;
     width: 300px;
     aspect-ratio: 16 / 9;
     flex-shrink: 0;
@@ -486,6 +487,56 @@ details summary {
     background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
     border: 1px solid rgba(226, 232, 240, 0.9);
     padding: 0.35rem;
+}
+
+.pub-list-item.pub-expanded .pub-thumbnail-box {
+    display: block;
+}
+
+.pub-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1em;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-right: 0.15em;
+    font-size: 0.85em;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.pub-toggle-btn:hover {
+    color: #b7791f;
+}
+
+.pub-list-item.pub-expanded .pub-toggle-btn {
+    transform: rotate(90deg);
+    color: #b7791f;
+}
+
+.pub-jcr-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.16rem 0.6rem;
+    border-radius: 4px;
+    background: #d4a562;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.pub-ccf-tag {
+    color: #dc2626;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.88rem;
+    white-space: nowrap;
 }
 
 .pub-thumbnail-box img {

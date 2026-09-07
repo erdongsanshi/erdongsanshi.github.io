@@ -253,13 +253,28 @@ function renderAllPublications(container, publications) {
 
 function createPublicationItem(pub) {
     const item = document.createElement('li');
-    item.className = 'pub-list-item with-thumbnail-expanded';
+    item.className = 'pub-list-item';
 
     const content = document.createElement('div');
     content.className = 'pub-content-wrapper';
 
     const line1 = document.createElement('div');
     line1.className = 'pub-line-1';
+
+    if (pub.thumbnail) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'pub-toggle-btn';
+        toggleBtn.setAttribute('aria-label', 'Toggle preview image');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        toggleBtn.addEventListener('click', () => {
+            const expanded = item.classList.toggle('pub-expanded');
+            item.classList.toggle('with-thumbnail-expanded', expanded);
+            toggleBtn.setAttribute('aria-expanded', String(expanded));
+        });
+        line1.appendChild(toggleBtn);
+    }
 
     const title = document.createElement('span');
     title.className = 'pub-title-text';
@@ -304,6 +319,20 @@ function createPublicationItem(pub) {
         badge.className = 'pub-badge-highlight';
         badge.textContent = badgeText;
         line3.appendChild(badge);
+    }
+
+    if (pub.jcr) {
+        const jcrTag = document.createElement('span');
+        jcrTag.className = 'pub-jcr-tag';
+        jcrTag.textContent = 'JCR ' + pub.jcr;
+        line3.appendChild(jcrTag);
+    }
+
+    if (pub.ccf) {
+        const ccfTag = document.createElement('span');
+        ccfTag.className = 'pub-ccf-tag';
+        ccfTag.textContent = '(CCF-' + pub.ccf + ')';
+        line3.appendChild(ccfTag);
     }
 
     content.appendChild(line3);
@@ -567,6 +596,7 @@ function getVenueShortName(venueStr, year) {
     }
 
     if (s.includes('TDSC')) return 'IEEE TDSC' + revisionSuffix;
+    if (s.includes('TIM')) return 'IEEE TIM' + revisionSuffix;
     if (s.includes('TMC')) return 'IEEE TMC' + revisionSuffix;
     if (s.includes('JSAC')) return 'IEEE JSAC' + revisionSuffix;
     if (s.includes('TGCN')) return 'IEEE TGCN' + revisionSuffix;
@@ -585,6 +615,7 @@ function getVenueFullName(venueStr) {
     const s = venueStr.replace(/\d{4}/g, '').trim();
 
     if (s.includes('TDSC')) return 'IEEE Transactions on Dependable and Secure Computing';
+    if (s.includes('TIM')) return 'IEEE Transactions on Instrumentation and Measurement';
     if (s.includes('TMC')) return 'IEEE Transactions on Mobile Computing';
     if (s.includes('JSAC')) return 'IEEE Journal on Selected Areas in Communications';
     if (s.includes('TGCN')) return 'IEEE Transactions on Green Communications and Networking';

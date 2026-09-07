@@ -6,9 +6,9 @@
     "isFirstAuthor": false,
     "showOnHomepage": true,
     "featuredOrder": 1,
-    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "venue": "IEEE TIM 2025",
     "year": "2025",
-    "highlight": "Vol. 74",
+    "jcr": "Q1",
     "thumbnail": "assets/publications/ffnet-thumb.jpg",
     "tags": [
       { "text": "Paper", "link": "https://ieeexplore.ieee.org/document/10938701" },
